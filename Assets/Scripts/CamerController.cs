@@ -12,11 +12,11 @@ public class CamerController : MonoBehaviour {
     }
     private void Update() {
         if(playerInput.isLookingRight) {
-            playerRoot.transform.Rotate(Vector3.up, -sensitivity * Time.deltaTime);
+            playerRoot.transform.Rotate(Vector3.up, sensitivity * Time.deltaTime);
         }
 
         if(playerInput.isLookingLeft) {
-            playerRoot.transform.Rotate(Vector3.up, sensitivity * Time.deltaTime);
+            playerRoot.transform.Rotate(Vector3.up, -sensitivity * Time.deltaTime);
         }
     }
 }

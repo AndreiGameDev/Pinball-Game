@@ -7,4 +7,5 @@ public class PlayerInputValues : MonoBehaviour
     public bool isLookingRight;
     public bool isLookingLeft;
     public float powerAmount;
+
 }

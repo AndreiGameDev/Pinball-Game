@@ -7,6 +7,7 @@ public class UIInputReceiver : MonoBehaviour
 {
     public PlayerInputValues playerInputScript;
     
+    
     public void RotateRight(bool isHolding) {
         playerInputScript.isLookingLeft = isHolding;
     }
@@ -17,5 +18,9 @@ public class UIInputReceiver : MonoBehaviour
 
     public void PowerValue(float powerValue) {
         playerInputScript.powerAmount = powerValue;
+    }
+
+    public void ShootBallEvent() {
+        GolfBallManager.Instance.ShootBall();
     }
 }
