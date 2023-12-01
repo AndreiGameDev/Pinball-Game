@@ -22,5 +22,6 @@ public class UIInputReceiver : MonoBehaviour
 
     public void ShootBallEvent() {
         GolfBallManager.Instance.ShootBall();
+        playerInputScript.powerAmount = 0;
     }
 }
