@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GolfBallManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GolfBallManager : MonoBehaviour
             return instance;
         }
     }
+    [SerializeField] Transform boundaryTransform;
     private void Awake() {
         if(instance == null) {
             instance = this;
@@ -33,9 +35,11 @@ public class GolfBallManager : MonoBehaviour
     IEnumerator isBallMoving() {
         yield return new WaitForFixedUpdate();
         if(rb.velocity.magnitude == 0) {
+            StartCoroutine(CheckIfBallOnBoundaryGround());
             UI.SetActive(true);
             trajectoryLine.SetActive(true);
         } else {
+            StartCoroutine(CheckIfBallOnBoundaryAir());
             StartCoroutine(isBallMoving());
         }
     }
@@ -45,5 +49,18 @@ public class GolfBallManager : MonoBehaviour
         trajectoryLine.SetActive(true);
         rb.AddForce(rootTransform.forward * playerInput.powerAmount, ForceMode.Impulse);
         StartCoroutine(isBallMoving());
+    }
+
+    IEnumerator CheckIfBallOnBoundaryAir() {
+        if(transform.position.y <= boundaryTransform.position.y) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        yield return null;
+    }
+    IEnumerator CheckIfBallOnBoundaryGround() {
+        if(Physics.CheckSphere(transform.position, transform.localScale.x, LayerMask.GetMask("PlayArea")) == false){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        yield return null;
     }
 }
