@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CamerController : MonoBehaviour {
+public class CameraController : MonoBehaviour {
     [SerializeField] GameObject playerRoot;
     PlayerInputValues playerInput;
     [SerializeField] float sensitivity = 100f;

@@ -8,4 +8,8 @@ public class PlayerInputValues : MonoBehaviour
     public bool isLookingLeft;
     public float powerAmount;
 
+    private void OnDisable() {
+        isLookingLeft = false;
+        isLookingRight = false;
+    }
 }

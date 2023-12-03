@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GolfBallManager : MonoBehaviour
-{
+public class GolfBallManager : MonoBehaviour {
     PlayerInputValues playerInput;
     private static GolfBallManager instance;
     public static GolfBallManager Instance {
@@ -13,22 +12,27 @@ public class GolfBallManager : MonoBehaviour
         }
     }
     [SerializeField] Transform boundaryTransform;
+    [SerializeField] Transform rootTransform;
+    [SerializeField] GameObject trajectoryLine;
+    Rigidbody rb;
+    GolfBallUI uiScript;
+    public int Strokes = 1;
+    public bool isInHole = false;
+    ResetManagerScript resetManager;
     private void Awake() {
         if(instance == null) {
             instance = this;
         } else {
             Destroy(gameObject);
         }
-    }
 
-    [SerializeField] Transform rootTransform;
-    [SerializeField] GameObject trajectoryLine;
-    Rigidbody rb;
-    GameObject UI;
-    private void Start() {
-        UI = GameObject.FindGameObjectWithTag("PlayerUI");
+        uiScript = GetComponent<GolfBallUI>();
         playerInput = GetComponent<PlayerInputValues>();
         rb = GetComponentInChildren<Rigidbody>();
+    }
+    private void Start() {
+        resetManager = ResetManagerScript.Instance;
+        uiScript.UpdateStrokeCounter(Strokes);
     }
 
 
@@ -36,31 +40,50 @@ public class GolfBallManager : MonoBehaviour
         yield return new WaitForFixedUpdate();
         if(rb.velocity.magnitude == 0) {
             StartCoroutine(CheckIfBallOnBoundaryGround());
-            UI.SetActive(true);
+            Strokes++;
+            uiScript.UpdateStrokeCounter(Strokes);
+            uiScript.GameUISetActive(true);
             trajectoryLine.SetActive(true);
         } else {
-            StartCoroutine(CheckIfBallOnBoundaryAir());
             StartCoroutine(isBallMoving());
         }
     }
 
     public void ShootBall() {
-        UI.SetActive(false);
-        trajectoryLine.SetActive(true);
+        uiScript.GameUISetActive(false);
+        trajectoryLine.SetActive(false);
         rb.AddForce(rootTransform.forward * playerInput.powerAmount, ForceMode.Impulse);
         StartCoroutine(isBallMoving());
     }
-
-    IEnumerator CheckIfBallOnBoundaryAir() {
-        if(transform.position.y <= boundaryTransform.position.y) {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    IEnumerator CheckIfBallOnBoundaryGround() {
+        if(Physics.CheckSphere(transform.position, transform.localScale.x, LayerMask.GetMask("PlayArea")) == false) {
+            resetManager.ResetPlayer(gameObject);
         }
         yield return null;
     }
-    IEnumerator CheckIfBallOnBoundaryGround() {
-        if(Physics.CheckSphere(transform.position, transform.localScale.x, LayerMask.GetMask("PlayArea")) == false){
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        yield return null;
+
+    public void HoleEnterEvent() {
+        StopAllCoroutines();
+        StartCoroutine(HoleEnterEventCoroutine());
+    }
+
+    IEnumerator HoleEnterEventCoroutine() {
+        isInHole = true;
+        uiScript.EnableHoleEnterText(Strokes);
+        resetManager.HoleCurrentlyOn++;
+        yield return new WaitForSeconds(3f);
+        resetManager.ResetPlayer(gameObject);
+        NewLevelReset();
+    }
+
+    public void NewLevelReset() {
+        isInHole = false;
+        Strokes = 1;
+        resetManager.DisableBoundaries();
+        uiScript.DisableHoleEnterText();
+        uiScript.UpdateStrokeCounter(Strokes);
+        uiScript.GameUISetActive(true);
+        trajectoryLine.SetActive(true);
+        
     }
 }
