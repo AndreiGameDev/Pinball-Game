@@ -9,6 +9,8 @@ TagManager:
   - Spawnpos
   - PlayArea
   - PlayerCharacter
+  - NoSFX
+  - OutsidePlayArea
   layers:
   - Default
   - TransparentFX

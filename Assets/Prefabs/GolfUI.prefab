@@ -242,7 +242,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 76.98841, y: 47.868717}
-  m_SizeDelta: {x: 400, y: 100}
+  m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3122840412862690338
 CanvasRenderer:
@@ -455,8 +455,8 @@ MonoBehaviour:
   m_HandleRect: {fileID: 602581468063545577}
   m_Direction: 1
   m_MinValue: 0
-  m_MaxValue: 50
-  m_WholeNumbers: 1
+  m_MaxValue: 30
+  m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:

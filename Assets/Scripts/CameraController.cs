@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
     [SerializeField] GameObject playerRoot;
     PlayerInputValues playerInput;
-    [SerializeField] float sensitivity = 100f;
+    public float sensitivity = 100f;
     private void Start() {
         playerInput = GetComponent<PlayerInputValues>();
     }

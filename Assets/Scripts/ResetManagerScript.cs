@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResetManagerScript : MonoBehaviour
 {
@@ -40,8 +41,12 @@ public class ResetManagerScript : MonoBehaviour
 
     //Resets the player to the hole it's currently at
     public void ResetPlayerToSpawn(GameObject gameObjectToReset) {
-        gameObjectToReset.transform.position = spawnPositions[HoleCurrentlyOn].transform.position;
-        gameObjectToReset.transform.rotation = spawnPositions[HoleCurrentlyOn].transform.rotation;
+        if(HoleCurrentlyOn >= holes.Count) {
+            SceneManager.LoadScene(1);
+        } else {
+            gameObjectToReset.transform.position = spawnPositions[HoleCurrentlyOn].transform.position;
+            gameObjectToReset.transform.rotation = spawnPositions[HoleCurrentlyOn].transform.rotation;
+        }
     }
 
     //Resets the player to the old position stored
@@ -50,7 +55,5 @@ public class ResetManagerScript : MonoBehaviour
         gameObjectRB.velocity = Vector3.zero;
         gameObjectToReset.transform.position = initialGolfballPosition;
         gameObjectToReset.transform.rotation = initialGolfballRotation;
-        
-        
     }
 }

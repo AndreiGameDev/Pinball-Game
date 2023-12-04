@@ -16,9 +16,11 @@ public class GolfBallManager : MonoBehaviour {
     [SerializeField] GameObject trajectoryLine;
     Rigidbody rb;
     GolfBallUI uiScript;
-    public int Strokes = 1;
+    public int strokes = 1;
     public bool isInHole = false;
     ResetManagerScript resetManager;
+    AudioManager audioManager;
+    TrailRenderer trailRenderer;
     private void Awake() {
         // Creat an instance for other scripts to access 
         if(instance == null) {
@@ -30,10 +32,12 @@ public class GolfBallManager : MonoBehaviour {
         uiScript = GetComponent<GolfBallUI>();
         playerInput = GetComponent<PlayerInputValues>();
         rb = GetComponentInChildren<Rigidbody>();
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
     }
     private void Start() {
         resetManager = ResetManagerScript.Instance;
-        uiScript.UpdateStrokeCounter(Strokes);
+        uiScript.UpdateStrokeCounter(strokes);
+        audioManager = AudioManager.Instance;
     }
 
     // Coroutine to check if the player is moving
@@ -43,8 +47,8 @@ public class GolfBallManager : MonoBehaviour {
         yield return new WaitForFixedUpdate();
         if(rb.velocity.magnitude == 0) {
             StartCoroutine(CheckIfBallOnBoundaryGround());
-            Strokes++;
-            uiScript.UpdateStrokeCounter(Strokes);
+            strokes++;
+            uiScript.UpdateStrokeCounter(strokes);
             uiScript.GameUISetActive(true);
             trajectoryLine.SetActive(true);
         } else {
@@ -82,22 +86,33 @@ public class GolfBallManager : MonoBehaviour {
     // Coroutine which sets variables when ball enters hole and moves the ball to the next hole
     IEnumerator HoleEnterEventCoroutine() {
         isInHole = true;
-        uiScript.EnableHoleEnterText(Strokes);
+        audioManager.PlaySFX(audioManager.M_Win);
+        uiScript.EnableHoleEnterText(strokes);
         resetManager.HoleCurrentlyOn++;
         yield return new WaitForSeconds(3f);
+        trailRenderer.enabled = false;
         resetManager.ResetPlayerToSpawn(gameObject);
+        trailRenderer.enabled = true;
+        ScoreKeeperScript.Instance.ScoreThisSession += strokes;
         NewLevelReset();
     }
 
     // Function which resetse everything to default when loading in a new hole
     public void NewLevelReset() {
         isInHole = false;
-        Strokes = 1;
+        strokes = 1;
         resetManager.SetBoundaries();
         uiScript.DisableHoleEnterText();
-        uiScript.UpdateStrokeCounter(Strokes);
+        uiScript.UpdateStrokeCounter(strokes);
         uiScript.GameUISetActive(true);
         trajectoryLine.SetActive(true);
         
     }
+
+    private void OnCollisionEnter(Collision collision) {
+        if(!isInHole && collision.collider.CompareTag("NoSFX") == false ) {
+            audioManager.PlaySFX(audioManager.SFX_GolfballBump);
+        }
+    }
+    
 }
