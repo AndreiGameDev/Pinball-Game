@@ -50,6 +50,8 @@ public class GolfBallManager : MonoBehaviour {
     }
 
     public void ShootBall() {
+        resetManager.initialGolfballPosition = transform.position;
+        resetManager.initialGolfballRotation = transform.rotation;
         uiScript.GameUISetActive(false);
         trajectoryLine.SetActive(false);
         rb.AddForce(rootTransform.forward * playerInput.powerAmount, ForceMode.Impulse);
@@ -57,7 +59,7 @@ public class GolfBallManager : MonoBehaviour {
     }
     IEnumerator CheckIfBallOnBoundaryGround() {
         if(Physics.CheckSphere(transform.position, transform.localScale.x, LayerMask.GetMask("PlayArea")) == false) {
-            resetManager.ResetPlayer(gameObject);
+            resetManager.ResetPlayerToSpawn(gameObject);
         }
         yield return null;
     }
@@ -72,7 +74,7 @@ public class GolfBallManager : MonoBehaviour {
         uiScript.EnableHoleEnterText(Strokes);
         resetManager.HoleCurrentlyOn++;
         yield return new WaitForSeconds(3f);
-        resetManager.ResetPlayer(gameObject);
+        resetManager.ResetPlayerToSpawn(gameObject);
         NewLevelReset();
     }
 

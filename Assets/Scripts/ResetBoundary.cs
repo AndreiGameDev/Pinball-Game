@@ -14,6 +14,6 @@ public class ResetBoundary : MonoBehaviour
         resetManager = ResetManagerScript.Instance;
     }
     private void OnTriggerEnter(Collider other) {
-        resetManager.ResetPlayer(Player);
+        resetManager.ResetPlayerToOldPosition(Player);
     }
 }

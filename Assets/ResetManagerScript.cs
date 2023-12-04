@@ -17,7 +17,8 @@ public class ResetManagerScript : MonoBehaviour
     public List<Transform> holes = new List<Transform>();
     public List<Transform> spawnPositions = new List<Transform>();
     public int HoleCurrentlyOn = 0;
-
+    public Vector3 initialGolfballPosition;
+    public Quaternion initialGolfballRotation;
     private void Start() {
         foreach(Transform hole in holes) {
             spawnPositions.Add(hole.Find("Spawnpos"));
@@ -34,8 +35,16 @@ public class ResetManagerScript : MonoBehaviour
             }
         }
     }
-    public void ResetPlayer(GameObject gameObjectToReset) {
+    public void ResetPlayerToSpawn(GameObject gameObjectToReset) {
         gameObjectToReset.transform.position = spawnPositions[HoleCurrentlyOn].transform.position;
         gameObjectToReset.transform.rotation = spawnPositions[HoleCurrentlyOn].transform.rotation;
+    }
+    public void ResetPlayerToOldPosition(GameObject gameObjectToReset) {
+        Rigidbody gameObjectRB = gameObjectToReset.GetComponent<Rigidbody>();
+        gameObjectRB.velocity = Vector3.zero;
+        gameObjectToReset.transform.position = initialGolfballPosition;
+        gameObjectToReset.transform.rotation = initialGolfballRotation;
+        
+        
     }
 }
