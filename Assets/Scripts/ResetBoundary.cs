@@ -13,6 +13,8 @@ public class ResetBoundary : MonoBehaviour
     private void Start() {
         resetManager = ResetManagerScript.Instance;
     }
+
+    // When the ball enters reset the ball to the old position
     private void OnTriggerEnter(Collider other) {
         resetManager.ResetPlayerToOldPosition(Player);
     }

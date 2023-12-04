@@ -11,12 +11,14 @@ public class CameraController : MonoBehaviour {
         playerInput = GetComponent<PlayerInputValues>();
     }
     private void Update() {
+        // Rotates camera to right
         if(playerInput.isLookingRight) {
-            playerRoot.transform.Rotate(Vector3.up, -sensitivity * Time.deltaTime);
+            playerRoot.transform.Rotate(Vector3.up, sensitivity * Time.deltaTime);
         }
 
+        // Rotates camera to left
         if(playerInput.isLookingLeft) {
-            playerRoot.transform.Rotate(Vector3.up, sensitivity * Time.deltaTime);
+            playerRoot.transform.Rotate(Vector3.up, -sensitivity * Time.deltaTime);
         }
     }
 }

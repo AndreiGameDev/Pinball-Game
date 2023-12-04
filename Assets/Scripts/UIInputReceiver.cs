@@ -7,19 +7,22 @@ public class UIInputReceiver : MonoBehaviour
 {
     public PlayerInputValues playerInputScript;
     
-    
-    public void RotateRight(bool isHolding) {
+    //Sets the variable to turn Camera left
+    public void RotateLeft(bool isHolding) {
         playerInputScript.isLookingLeft = isHolding;
     }
 
-    public void RotateLeft(bool isHolding) {
+    // Set the variable to turn camera right
+    public void RotateRight(bool isHolding) {
         playerInputScript.isLookingRight = isHolding;
     }
 
-    public void PowerValue(float powerValue) {
+    // Set the power variable to whatever the slider the value is
+    public void SetPowerValue(float powerValue) {
         playerInputScript.powerAmount = powerValue;
     }
 
+    // Shoots the ball
     public void ShootBallEvent() {
         GolfBallManager.Instance.ShootBall();
         playerInputScript.powerAmount = 0;

@@ -6,6 +6,7 @@ public class AnimationClipScript : MonoBehaviour
 {
     [SerializeField]Animation animationComp;
 
+    // Plays animation when enabled
     private void OnEnable() {
         animationComp.Play();
     }

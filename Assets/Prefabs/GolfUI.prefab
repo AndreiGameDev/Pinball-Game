@@ -224,7 +224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6751044835987986832
 RectTransform:
   m_ObjectHideFlags: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1801634938480987483}
         m_TargetAssemblyTypeName: UIInputReceiver, Assembly-CSharp
-        m_MethodName: PowerValue
+        m_MethodName: SetPowerValue
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HoleTrigger : MonoBehaviour
 {
+    // When the player enters the hole, trigger the enter hole event
     private void OnTriggerEnter(Collider other) {
         if(other.CompareTag("PlayerCharacter")) {
             GolfBallManager golfBall = other.GetComponent<GolfBallManager>();
