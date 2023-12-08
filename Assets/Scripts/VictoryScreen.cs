@@ -31,7 +31,7 @@ public class VictoryScreen : MonoBehaviour
     string LowerScore() {
         return "Congratsulations! You have completed the level but you have not surpassed your best score." +
             "\n Strokes: " + scoreKeeperScript.ScoreThisSession + 
-            "\n You need to get " + (scoreKeeperScript.BestScore - scoreKeeperScript.ScoreThisSession +1) + " less strokes for a new best score.";
+            "\n You need to get at least " + (scoreKeeperScript.ScoreThisSession - scoreKeeperScript.BestScore + 1) + " less strokes for a new best score.";
     }
 
     public void BackToMainMenu() {

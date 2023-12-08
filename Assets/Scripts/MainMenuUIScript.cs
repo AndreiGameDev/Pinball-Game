@@ -10,7 +10,7 @@ public class MainMenuUIScript : MonoBehaviour
     AudioManager audioManager;
     private void Start() {
         audioManager = AudioManager.Instance;
-        if(ScoreKeeperScript.Instance.BestScore > 0) {
+        if(PlayerPrefs.HasKey("HighScore")) {
             highScoreText.text += ScoreKeeperScript.Instance.BestScore;
         } else {
             highScoreText.text = "No best score has been setled yet.";
