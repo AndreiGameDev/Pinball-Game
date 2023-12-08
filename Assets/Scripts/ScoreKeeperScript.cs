@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreKeeperScript : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ScoreKeeperScript : MonoBehaviour
     private void Awake() {
         if(Instance == null) {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         } else {
             Destroy(gameObject);
         }
@@ -21,7 +23,6 @@ public class ScoreKeeperScript : MonoBehaviour
     }
     public bool isHighScore() {
         if(ScoreThisSession > BestScore) {
-            SetHighscore();
             return true;
         } else {
             return false;
@@ -31,5 +32,20 @@ public class ScoreKeeperScript : MonoBehaviour
         PlayerPrefs.SetInt("HighScore", ScoreThisSession);
     }
 
-    
+    private void Start() {
+        SceneManager.activeSceneChanged += OnSceneChange;
+    }
+
+    void OnSceneChange(Scene currentScene, Scene nextScene) {
+        foreach(int i in PlayerLevelScenes.instance.GetPlayerLevelScenes()) {
+            if(nextScene.buildIndex == i) {
+                ScoreThisSession = 0;
+            } else if(nextScene.buildIndex == PlayerLevelScenes.instance.GetPlayerWinSceneIndex()) {
+                if(ScoreThisSession > BestScore) {
+                    SetHighscore();
+                }
+                }
+        }
+    }
+
 }

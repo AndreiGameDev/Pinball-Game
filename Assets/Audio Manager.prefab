@@ -268,6 +268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6675085553081336751}
   - component: {fileID: 6030927312959658674}
+  - component: {fileID: 923323656322887505}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -309,8 +310,16 @@ MonoBehaviour:
   SFX_GolfballBump: {fileID: 8300000, guid: 41992986de52a0a47b08392e958c554f, type: 3}
   SFX_GolfballDestroyed: {fileID: 8300000, guid: 69a066ae6a8519a4e8459ab267f5d996,
     type: 3}
-  SFX_ClickButton: {fileID: 8300000, guid: 16129f73b67351b499e3535a5e1f35ed, type: 3}
+  SFX_ClickButton: {fileID: 8300000, guid: 975743d7d0c58ff42a8b19cfd36599ec, type: 3}
   SFX_ClappingWin: {fileID: 8300000, guid: b7fab7de92cac8549a52064f628086b2, type: 3}
   M_Win: {fileID: 8300000, guid: 2c9b47916819f5248a14c9d8e6c1b7bd, type: 3}
   M_MainMenu: {fileID: 8300000, guid: cf8ff00160f7dee4298e09f17adebd3d, type: 3}
   M_Game: {fileID: 8300000, guid: e9a2011a8ec7e5a49adca9d4268accfa, type: 3}
+--- !u!81 &923323656322887505
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7196355627429348239}
+  m_Enabled: 1

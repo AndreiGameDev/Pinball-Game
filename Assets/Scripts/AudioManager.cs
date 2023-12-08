@@ -49,10 +49,7 @@ public class AudioManager : MonoBehaviour {
                 music.clip = M_Game;
                 music.Play();
             } else if(nextScene.buildIndex == PlayerLevelScenes.instance.GetPlayerWinSceneIndex()){
-                music.loop = false;
                 music.Stop();
-                music.clip = M_Win;
-                music.Play();
                 PlaySFX(SFX_ClappingWin);
             } else {
                 music.Stop();

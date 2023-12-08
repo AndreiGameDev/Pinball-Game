@@ -11,17 +11,22 @@ public class SettingsScript : MonoBehaviour
     [SerializeField] Slider sensitivitySlider;
     [SerializeField] Slider MusicVolumeSlider;
     [SerializeField] Slider SFXVolumeSlider;
+    [SerializeField] bool isMainMenu = false;
+    CameraController cameraController;
 
     private void Start() {
-
-        switch(PlayerPrefs.HasKey("PlayerSens")) {
-            case true:
-                LoadSensitivity();
-                break;
-            case false:
-                SetSensitivity();
-                break;
+        cameraController = FindObjectOfType<CameraController>();
+        if(!isMainMenu) {
+            switch(PlayerPrefs.HasKey("PlayerSens")) {
+                case true:
+                    LoadSensitivity();
+                    break;
+                case false:
+                    SetSensitivity();
+                    break;
+            }
         }
+        
         switch(PlayerPrefs.HasKey("musicVolume")) {
             case true:
                 LoadMusicVolume();
@@ -43,12 +48,8 @@ public class SettingsScript : MonoBehaviour
     public void SetSensitivity( ) {
         float value = sensitivitySlider.value;
         PlayerPrefs.SetFloat("PlayerSens", value);
+        cameraController.sensitivity = sensitivitySlider.value;
     }
-
-    public void SetCameraSensitivity() {
-        FindObjectOfType<CameraController>().sensitivity = sensitivitySlider.value;
-    }
-
     void LoadSensitivity() {
         sensitivitySlider.value = PlayerPrefs.GetFloat("PlayerSens");
         SetSensitivity();
