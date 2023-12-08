@@ -20,14 +20,14 @@ public class ScoreKeeperScript : MonoBehaviour {
         }
     }
     public bool isHighScore() {
-        if(ScoreThisSession > BestScore) {
-            SetHighscore();
+        if(ScoreThisSession < BestScore) {
+            SetBestScore();
             return true;
         } else {
             return false;
         }
     }
-    void SetHighscore() {
+    void SetBestScore() {
         PlayerPrefs.SetInt("HighScore", ScoreThisSession);
     }
 
