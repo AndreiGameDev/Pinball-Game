@@ -18,13 +18,12 @@ public class AudioManager : MonoBehaviour {
     public AudioClip SFX_GolfballDestroyed;
     public AudioClip SFX_ClickButton;
     public AudioClip SFX_ClappingWin;
-
     [Header("Music")]
     public AudioClip M_Win;
     [SerializeField] AudioClip M_MainMenu;
     [SerializeField] AudioClip M_Game;
 
-
+    // Setup instance
     private void Awake() {
         if(_instance != null && _instance != this) {
             Destroy(this.gameObject);
@@ -33,12 +32,18 @@ public class AudioManager : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
         }
     }
+
+    // When the scene changes play a certain music
     private void Start() {
         SceneManager.activeSceneChanged += OnSceneChange;
     }
+
+    // Function to play sound effects
     public void PlaySFX(AudioClip clip) {
         sfx.PlayOneShot(clip);
     }
+
+    // Logic to play certain music depending on the scene
     void OnSceneChange(Scene currentScene, Scene nextScene) {
         foreach(int i in PlayerLevelScenes.instance.GetPlayerLevelScenes()) {
             if(music.loop == false) {

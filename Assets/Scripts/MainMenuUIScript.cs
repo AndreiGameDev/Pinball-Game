@@ -18,10 +18,11 @@ public class MainMenuUIScript : MonoBehaviour
         
     }
     public void PlayEvent() {
-        SceneManager.LoadScene(PlayerLevelScenes.instance.GetPlayerLevelScenes()[0]);
+        SceneManager.LoadScene(PlayerLevelScenes.instance.GetPlayerLevelScenes()[0], LoadSceneMode.Single);
     }
 
     public void PlayButtonSFX() {
         audioManager.PlaySFX(audioManager.SFX_ClickButton);
     }
+    
 }

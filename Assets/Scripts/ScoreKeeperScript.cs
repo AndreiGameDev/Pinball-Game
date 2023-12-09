@@ -29,6 +29,7 @@ public class ScoreKeeperScript : MonoBehaviour {
     }
     void SetBestScore() {
         PlayerPrefs.SetInt("HighScore", ScoreThisSession);
+        BestScore = ScoreThisSession;
     }
 
     private void Start() {
