@@ -16,6 +16,8 @@ public class SettingsScript : MonoBehaviour
 
     private void Start() {
         cameraController = FindObjectOfType<CameraController>();
+
+        // If the player has any saved settings then load them otherwise set them to default
         if(!isMainMenu) {
             switch(PlayerPrefs.HasKey("PlayerSens")) {
                 case true:
@@ -26,7 +28,6 @@ public class SettingsScript : MonoBehaviour
                     break;
             }
         }
-        
         switch(PlayerPrefs.HasKey("musicVolume")) {
             case true:
                 LoadMusicVolume();
@@ -45,11 +46,7 @@ public class SettingsScript : MonoBehaviour
         }
     }
 
-    public void SetSensitivity( ) {
-        float value = sensitivitySlider.value;
-        PlayerPrefs.SetFloat("PlayerSens", value);
-        cameraController.sensitivity = sensitivitySlider.value;
-    }
+    
     void LoadSensitivity() {
         sensitivitySlider.value = PlayerPrefs.GetFloat("PlayerSens");
         SetSensitivity();
@@ -62,12 +59,16 @@ public class SettingsScript : MonoBehaviour
         SFXVolumeSlider.value = PlayerPrefs.GetFloat("sfxVolume");
         SetSFXVolume();
     }
+    public void SetSensitivity() {
+        float value = sensitivitySlider.value;
+        PlayerPrefs.SetFloat("PlayerSens", value);
+        cameraController.sensitivity = sensitivitySlider.value;
+    }
     public void SetMusicVolume() {
         float volume = MusicVolumeSlider.value;
         masterMixer.SetFloat("MixerMusicVolume", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("musicVolume", volume);
     }
-
     public void SetSFXVolume() {
         float volume = SFXVolumeSlider.value;
         masterMixer.SetFloat("MixerSFXVolume", Mathf.Log10(volume) * 20);

@@ -165,7 +165,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 886982740}
+      objectReference: {fileID: 886982742}
     - target: {fileID: 4935187225812375154, guid: c97b574b6e42e6c4da7afbb08008b040,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
@@ -194,7 +194,7 @@ PrefabInstance:
     - target: {fileID: 4935187225812375154, guid: c97b574b6e42e6c4da7afbb08008b040,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: PlayButtonSFX
+      value: ButtonClick
       objectReference: {fileID: 0}
     - target: {fileID: 4935187225812375154, guid: c97b574b6e42e6c4da7afbb08008b040,
         type: 3}
@@ -209,7 +209,7 @@ PrefabInstance:
     - target: {fileID: 4935187225812375154, guid: c97b574b6e42e6c4da7afbb08008b040,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: MainMenuUIScript, Assembly-CSharp
+      value: UISoundManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4935187225812375154, guid: c97b574b6e42e6c4da7afbb08008b040,
         type: 3}
@@ -936,6 +936,7 @@ GameObject:
   - component: {fileID: 886982736}
   - component: {fileID: 886982740}
   - component: {fileID: 886982741}
+  - component: {fileID: 886982742}
   m_Layer: 5
   m_Name: MainMenuCanvas
   m_TagString: Untagged
@@ -1057,6 +1058,18 @@ MonoBehaviour:
   MusicVolumeSlider: {fileID: 5883960803722729299}
   SFXVolumeSlider: {fileID: 8666723899947297421}
   isMainMenu: 1
+--- !u!114 &886982742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886982735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 925e45b3b2ebac7499b15c532c2ec344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &990206242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,9 +1305,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 886982740}
-        m_TargetAssemblyTypeName: MainMenuUIScript, Assembly-CSharp
-        m_MethodName: PlayButtonSFX
+      - m_Target: {fileID: 886982742}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: ButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2776,9 +2789,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 886982740}
-        m_TargetAssemblyTypeName: MainMenuUIScript, Assembly-CSharp
-        m_MethodName: PlayButtonSFX
+      - m_Target: {fileID: 886982742}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: ButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -16,7 +16,7 @@ public class ResetBoundary : MonoBehaviour
         resetManager = ResetManagerScript.Instance;
     }
 
-    // When the ball enters reset the ball to the old position
+    // When the player golfball enters, reset the golfball to the old position and play death sound
     private void OnTriggerEnter(Collider other) {
         audioManager.PlaySFX(audioManager.SFX_GolfballDestroyed);
         resetManager.ResetPlayerToOldPosition(Player);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerLevelScenes : MonoBehaviour {
-    // This script is used as an instance to keep track in which scnene the player is in.
+    // This script is used as an instance to keep track in which scene the player is in.
     public static PlayerLevelScenes instance;
     [SerializeField] int[] playerLevelSceneIndexes;
     [SerializeField] int playerWinLevelSceneIndex;

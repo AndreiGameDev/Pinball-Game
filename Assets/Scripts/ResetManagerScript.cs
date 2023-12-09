@@ -20,6 +20,7 @@ public class ResetManagerScript : MonoBehaviour
     public int HoleCurrentlyOn = 0;
     public Vector3 initialGolfballPosition;
     public Quaternion initialGolfballRotation;
+
     // Grabs every spawn position of the holes
     private void Start() {
         foreach(Transform hole in holes) {

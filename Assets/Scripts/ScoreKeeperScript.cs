@@ -7,6 +7,8 @@ public class ScoreKeeperScript : MonoBehaviour {
     public static ScoreKeeperScript Instance;
     public int ScoreThisSession = 0;
     public int BestScore = 0;
+    
+    // Setup instance and set high score
     private void Awake() {
         if(Instance == null) {
             Instance = this;
@@ -19,7 +21,9 @@ public class ScoreKeeperScript : MonoBehaviour {
             BestScore = PlayerPrefs.GetInt("HighScore");
         }
     }
-    public bool isHighScore() {
+
+    // Checks if better score or not
+    public bool isBestScore() {
         if(ScoreThisSession < BestScore) {
             SetBestScore();
             return true;
@@ -27,11 +31,14 @@ public class ScoreKeeperScript : MonoBehaviour {
             return false;
         }
     }
+    
+    // Sets best score
     void SetBestScore() {
         PlayerPrefs.SetInt("HighScore", ScoreThisSession);
         BestScore = ScoreThisSession;
     }
 
+    // Subscribes to event which checks if the next scene is a player level it resets the score of the session.
     private void Start() {
         SceneManager.activeSceneChanged += OnSceneChange;
     }
