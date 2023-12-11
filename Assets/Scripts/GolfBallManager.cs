@@ -68,7 +68,7 @@ public class GolfBallManager : MonoBehaviour {
         StartCoroutine(isBallMoving());
     }
 
-    // When the player stops moving htis coroutine will be run to check if the player is on a playable area
+    // When the player stops moving this coroutine will be run to check if the player is on a playable area
     IEnumerator CheckIfBallOnBoundaryGround() {
         if(Physics.CheckSphere(transform.position, transform.localScale.x, LayerMask.GetMask("PlayArea")) == false) {
             resetManager.ResetPlayerToOldPosition(gameObject);
